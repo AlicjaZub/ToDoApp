@@ -2,32 +2,41 @@
 <html>
 <head>
     <meta charset="utf-8"/>
-    <title>Slim 4</title>
+    <title>To Do List</title>
     <link href='//fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
-    <style>
-        body {
-            margin: 50px 0 0 0;
-            padding: 0;
-            width: 100%;
-            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-            text-align: center;
-            color: #aaa;
-            font-size: 18px;
-        }
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <script defer src="js/script.js"></script>
 
-        h1 {
-            color: #719e40;
-            letter-spacing: -3px;
-            font-family: 'Lato', sans-serif;
-            font-size: 100px;
-            font-weight: 200;
-            margin-bottom: 0;
-        }
-    </style>
+
 </head>
 <body>
-<h1>Slim</h1>
-<div>a microframework for PHP</div>
-    <p>Try <a href="http://www.slimframework.com">SlimFramework</a></p>
+<div>
+    <h1>TO DO LIST:</h1>
+    <div>
+        <form action="/" method="post">
+            <ul>
+                <?php echo \ToDoList\ViewHelper\TasksViewHelper::displayTasks($tasks); ?>
+            </ul>
+        </form>
+    </div>
+    <div>
+        <form action="/newTask" method="post">
+            <ul>
+                <li><label for="newTask">Add a new task:</label></li>
+                <li><input type="text" id="newTask" name="newTask"></li>
+                <li><input class="add_task" type="submit" value="Add task!"></li>
+                <li><?php if(isset($_GET['error']) && $_GET['error'] == 1){
+                        echo 'Please enter a new task :)';
+                    } elseif ( isset($_GET['error']) && $_GET['error'] == 2) {
+                        echo 'This task is a bit too long :)';
+                    } ?></li>
+            </ul>
+
+        </form>
+
+    </div>
+
+</div>
+
 </body>
 </html>
