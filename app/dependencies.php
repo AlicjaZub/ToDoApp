@@ -33,5 +33,16 @@ return function (ContainerBuilder $containerBuilder) {
         return $renderer;
     };
 
+    $container['db'] = function () {
+        $db = new \PDO('mysql:host=127.0.0.1;dbname=ToDoList', 'root', 'password');
+        $db->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_ASSOC);
+        return $db;
+    };
+
+    $container['TaskModel'] = DI\factory(\ToDoList\Factories\TaskModalFactory::class);
+    $container['TaskController'] = DI\factory(\ToDoList\Factories\TaskControllerFactory::class);
+    $container['NewTaskController'] = DI\factory(\ToDoList\Factories\NewTaskControllerFactory::class);
+    $container['UpdateTaskStatusController'] = DI\factory(\ToDoList\Factories\UpdateTaskStatusControllerFactory::class);
+
     $containerBuilder->addDefinitions($container);
 };

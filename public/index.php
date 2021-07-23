@@ -36,6 +36,7 @@ $callableResolver = $app->getCallableResolver();
 
 // Register middleware
 $middleware = require __DIR__ . '/../app/middleware.php';
+$app->addBodyParsingMiddleware();
 $middleware($app);
 
 // Register routes
